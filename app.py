@@ -5,12 +5,12 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return """
-        <h1>Hola desde Flask con Traefik 🚀</h1>
-        <p>Bienvenido a mi aplicación Flask.</p>
+        <h1>EXAMEN FINAL 🚀</h1>
+        <p>Final aprobado, nos vemos en TITULACION</p>
         <ul>
-            <li><a href="/info">Información</a></li>
-            <li><a href="/tabla">Tabla simple</a></li>
-            <li><a href="/lista">Lista dinámica</a></li>
+            <li><a href="/info">Diego</a></li>
+            <li><a href="/tabla">DEVOPS</a></li>
+            <li><a href="/lista">TODO 10</a></li>
             <li><a href="/formulario">Formulario</a></li>
             <li><a href="/html">Página HTML completa</a></li>
             <li><a href="/api/datos">API JSON</a></li>
