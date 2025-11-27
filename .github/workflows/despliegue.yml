@@ -41,63 +41,9 @@ jobs:
     - name: 🏗️ Build and push Docker image
       uses: docker/build-push-action@v6
       with:
-        context:
+        context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/demlema/diego-traefik:latest
+        tags: ghcr.io/demlema/examen-lema:latest
+
         
-    - name: 🧾 Mostrar variables básicas (solo locales, no secretos)
-      run: |
-        echo "Probando conexión SSH con:"
-        echo "Host: ${{ secrets.VPS_HOST }}"
-        echo "Usuario: ${{ secrets.VPS_USER }}"
-        echo "Puerto: ${{ secrets.VPS_SSH_PORT }}"
-    
-    - name: 🧪 Probar conexión SSH
-      uses: appleboy/ssh-action@v1
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: ${{ secrets.VPS_SSH_PORT }}
-        script: |
-          echo "✅ Conexión exitosa desde GitHub Actions"
-          hostname
-          whoami
-          uptime
-
-    - name: 🧪 Probar conexión SCP
-      uses: appleboy/scp-action@v1
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: ${{ secrets.VPS_SSH_PORT }}   
-        source: "stack.yml"
-        target: "/home/${{ secrets.VPS_USER }}/deploy"  
-
-    - name: 🧪 Despliegue de servicio
-      uses: appleboy/ssh-action@v1
-      with:
-        host: ${{ secrets.VPS_HOST }}
-        username: ${{ secrets.VPS_USER }}
-        password: ${{ secrets.VPS_PASSWORD }}
-        port: ${{ secrets.VPS_SSH_PORT }}   
-        script: |
-          echo "✅ desplegando servicios"
-          cd ~/deploy
-
-          echo " descargando la imagen desde GIT"
-          echo "${{ secrets.GHCR_PATH }}" | docker login ghcr.io -u demlema --password-stdin
-          docker pull ghcr.io/demlema/diego-traefik:latest
-
-          echo " deteniendo los servicios"
-          docker stack rm diego || true 
-
-          echo "esperar 20 segundos..."
-          sleep 20
-
-          echo "desplegano el stack a los servicios"
-          docker stack deploy --with-registry-auth -c stack.yml diego
-
-          docker ps
