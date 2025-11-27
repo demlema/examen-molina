@@ -12,7 +12,7 @@ def home():
             <li><a href="/tabla">DEVOPS</a></li>
             <li><a href="/lista">TODO 10</a></li>
             <li><a href="/formulario">Formulario</a></li>
-            <li><a href="/html">Página HTML completa</a></li>
+            <li><a href="/html">Mi pagina final</a></li>
             <li><a href="/api/datos">API JSON</a></li>
         </ul>
     """
