@@ -1,23 +1,23 @@
 version: "3.8"
 
 services:
-  pancho:
-    image: ghcr.io/demlema/diego-traefik:latest
+  rayo:
+    image: ghcr.io/demlema/examen-molina:latest
     build: .
     deploy:
       replicas: 1
       labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.pancho.entrypoints=http"
-        - "traefik.http.routers.pancho.rule=Host(`pancho.byronrm.com`)"
-        - "traefik.http.middlewares.pancho-https-redirect.redirectscheme.scheme=https"
-        - "traefik.http.routers.pancho.middlewares=pancho-https-redirect"
-        - "traefik.http.routers.pancho-secure.entrypoints=https"
-        - "traefik.http.routers.pancho-secure.rule=Host(`pancho.byronrm.com`)"
-        - "traefik.http.routers.pancho-secure.tls=true"
-        - "traefik.http.routers.pancho-secure.tls.certresolver=http"
-        - "traefik.http.routers.pancho-secure.service=pancho"
-        - "traefik.http.services.pancho.loadbalancer.server.port=80"
+        - "traefik.http.routers.rayo.entrypoints=http"
+        - "traefik.http.routers.rayo.rule=Host(`rayo.byronrm.com`)"
+        - "traefik.http.middlewares.rayo-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.rayo.middlewares=rayo-https-redirect"
+        - "traefik.http.routers.rayo-secure.entrypoints=https"
+        - "traefik.http.routers.rayo-secure.rule=Host(`rayo.byronrm.com`)"
+        - "traefik.http.routers.rayo-secure.tls=true"
+        - "traefik.http.routers.rayo-secure.tls.certresolver=http"
+        - "traefik.http.routers.rayo-secure.service=rayo"
+        - "traefik.http.services.rayo.loadbalancer.server.port=80"
         - "traefik.docker.network=traefik-public"
     networks:
       - traefik-public

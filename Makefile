@@ -1,4 +1,4 @@
-APP_NAME=diego
+APP_NAME=rayo
 STACK_FILE=stack.yml
 
 build:
